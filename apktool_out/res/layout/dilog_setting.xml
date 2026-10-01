@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_surface_refined"
+    android:padding="20dp">
+
+    <!-- Compact dialog header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_emergency_sos"
+            android:tint="#E2F9D3"
+            android:contentDescription="SOS"
+            android:layout_marginEnd="10dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emergency contact"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/futura"
+                app:fontFamily="@font/futura"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SMS recipient for fall alerts"
+                android:textSize="11sp"
+                android:textColor="#CFF0F5"
+                android:fontFamily="@font/futura"
+                app:fontFamily="@font/futura"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Explanation -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="If a fall is detected, this number will receive an emergency SMS containing the worker's GPS location."
+        android:textSize="12sp"
+        android:textColor="#CFF0F5"
+        android:fontFamily="@font/futura"
+        app:fontFamily="@font/futura"
+        android:lineSpacingExtra="2dp"
+        android:layout_marginBottom="18dp"/>
+
+    <!-- Field label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PHONE NUMBER"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:textColor="#E2F9D3"
+        android:letterSpacing="0.10"
+        android:fontFamily="@font/futura"
+        app:fontFamily="@font/futura"
+        android:layout_marginBottom="7dp"/>
+
+    <!-- Phone input -->
+    <EditText
+        android:id="@+id/sosContactNumber"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="+91 00000 00000"
+        android:inputType="phone"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#5A889A"
+        android:textSize="15sp"
+        android:fontFamily="@font/futura"
+        app:fontFamily="@font/futura"
+        android:background="@drawable/card_surface_refined"
+        android:paddingStart="13dp"
+        android:paddingEnd="13dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:layout_marginBottom="18dp"/>
+
+    <!-- Actions -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:gravity="end|center_vertical">
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="Cancel"
+            android:textSize="13sp"
+            android:textColor="#CFF0F5"
+            android:fontFamily="@font/futura"
+            app:fontFamily="@font/futura"
+            android:background="@android:color/transparent"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="Save contact"
+            android:textSize="13sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/futura"
+            app:fontFamily="@font/futura"
+            android:background="@drawable/btn_action_primary"
+            app:backgroundTint="@null"
+            android:backgroundTint="@null"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:textAllCaps="false"
+            android:layout_marginStart="4dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

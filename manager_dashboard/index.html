@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FallSafe™ Enterprise Manager Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Wallpaper with Overlay -->
+  <div class="bg-wallpaper"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Top Navigation Header -->
+    <header class="top-nav glass-card">
+      <div class="brand-section">
+        <div class="brand-badge">
+          <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="brand-titles">
+          <h1 class="brand-name">FALLSAFE<span class="brand-tag">ENTERPRISE</span></h1>
+          <p class="brand-subtitle">Occupational Safety & Phone Telemetry Bridge</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Live System Clock -->
+        <div class="system-time-badge">
+          <span class="live-dot pulse-emerald"></span>
+          <span id="currentTime">--:--:--</span>
+        </div>
+
+        <!-- Phone Bridge Status Badge -->
+        <div class="phone-bridge-badge">
+          <svg class="btn-icon text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+          <span>Phone Bridge: </span>
+          <strong id="headerBridgeStatus" class="text-mint">LISTENING (:8080)</strong>
+        </div>
+
+        <!-- Add Employee Button -->
+        <button id="btnAddEmployee" class="btn btn-secondary">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          <span>Add Personnel</span>
+        </button>
+
+        <!-- Test Alarm Siren Trigger -->
+        <button id="btnSimulateFall" class="btn btn-outline" title="Simulate incoming fall signal from phone">
+          <svg class="btn-icon text-amber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          <span>Simulate Phone Fall Alert</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Global Emergency Alert Banner (Shown during active fall) -->
+    <div id="fallAlertBanner" class="alert-banner hidden">
+      <div class="alert-content">
+        <div class="alert-siren-box">
+          <svg class="siren-icon blink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <div class="alert-text">
+          <h2 class="alert-heading">🚨 CRITICAL ALERT: FALL DETECTED!</h2>
+          <p id="alertDetails">Worker <strong id="alertEmpName">John Miller</strong> has experienced an impact at <span id="alertTime">--:--</span>. Relayed by Phone App.</p>
+        </div>
+      </div>
+      <div class="alert-actions">
+        <button id="btnDispatchEmergency" class="btn btn-danger btn-pulse">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          WhatsApp SOS
+        </button>
+        <button id="btnAcknowledgeAlert" class="btn btn-secondary">Acknowledge & Clear</button>
+      </div>
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <section class="stats-grid">
+      <div class="stat-card glass-card">
+        <div class="stat-info">
+          <span class="stat-label">TOTAL WORKFORCE</span>
+          <span id="statTotalEmployees" class="stat-value">3</span>
+        </div>
+        <div class="stat-icon-wrap mint-glow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="stat-card glass-card">
+        <div class="stat-info">
+          <span class="stat-label">ONLINE VIA PHONE APP</span>
+          <span id="statActiveDevices" class="stat-value text-mint">1</span>
+        </div>
+        <div class="stat-icon-wrap emerald-glow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+            <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+            <line x1="12" y1="20" x2="12.01" y2="20"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="stat-card glass-card">
+        <div class="stat-info">
+          <span class="stat-label">PHONE TELEMETRY BRIDGE</span>
+          <span id="statBridgeStatus" class="stat-badge badge-online">ACTIVE</span>
+        </div>
+        <div class="stat-icon-wrap cyan-glow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="stat-card glass-card">
+        <div class="stat-info">
+          <span class="stat-label">RECORDED FALL DETECTIONS</span>
+          <span id="statIncidentCount" class="stat-value text-emerald">1 EVENT</span>
+        </div>
+        <div class="stat-icon-wrap alert-glow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace Section -->
+    <main class="dashboard-body">
+      
+      <!-- Left Column: Employee Roster & Monitoring Cards -->
+      <section class="roster-section">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">ACTIVE PERSONNEL SENSING MATRIX</h2>
+            <p class="section-subtitle">Real-time biometrics & fall telemetry received from Phone App</p>
+          </div>
+          <div class="roster-filter-controls">
+            <button class="filter-btn active" data-filter="all">All (<span id="filterCountAll">3</span>)</button>
+            <button class="filter-btn" data-filter="online">Online (<span id="filterCountOnline">1</span>)</button>
+            <button class="filter-btn" data-filter="alert">Alerts (<span id="filterCountAlert">0</span>)</button>
+          </div>
+        </div>
+
+        <!-- Employee Cards Container -->
+        <div id="employeeGrid" class="employee-grid">
+          <!-- Dynamic cards generated via JavaScript -->
+        </div>
+
+        <!-- Phone App Bridge Instructions Banner -->
+        <div class="glass-card bridge-info-box">
+          <div class="bridge-info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+          </div>
+          <div class="bridge-info-text">
+            <h4>Phone App to PC Bridge Connected</h4>
+            <p>Your Phone App receives telemetry from the Seeed XIAO ESP32-C3 via BLE and relays it to this PC at <code id="serverBridgeUrl">http://10.21.162.218:8080/api/telemetry</code>. Fall detections, Heart Rate (BPM), and GPS automatically update here.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Live Phone Telemetry & Comprehensive Fall Detections Log -->
+      <aside class="telemetry-sidebar">
+        
+        <!-- Live Selected Worker Telemetry Card -->
+        <div class="glass-card telemetry-card">
+          <div class="card-header-flex">
+            <div>
+              <h3 class="card-title">LIVE BIOMETRIC TELEMETRY</h3>
+              <p class="card-caption" id="activeFeedName">Selected: John Miller (FallSafe BLE)</p>
+            </div>
+            <div class="bpm-indicator-badge">
+              <span class="heart-pulse-icon">❤️</span>
+              <span id="liveBpmDisplay" class="bpm-number">78</span>
+              <span class="bpm-unit">BPM</span>
+            </div>
+          </div>
+
+          <div class="telemetry-meta-row">
+            <div class="meta-pill">
+              <span class="meta-label">LAST SYNC</span>
+              <span class="meta-val text-mint" id="phoneLastSync">--:--:--</span>
+            </div>
+            <div class="meta-pill">
+              <span class="meta-label">BATTERY</span>
+              <span class="meta-val text-emerald" id="phoneBattery">95%</span>
+            </div>
+            <div class="meta-pill">
+              <span class="meta-label">FALL SENSOR</span>
+              <span class="meta-val text-cyan" id="phoneMotionState">Normal / Stable</span>
+            </div>
+          </div>
+
+          <div class="phone-gps-row">
+            <span class="meta-label">LAST RECORDED GPS COORDINATES:</span>
+            <div class="gps-coords-display">
+              <span id="liveGpsCoords">28.6139° N, 77.2090° E</span>
+              <a id="liveGpsLink" href="https://www.google.com/maps?q=28.6139,77.2090" target="_blank" class="btn-text-xs text-mint">View Map ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comprehensive Fall Detections Log Card -->
+        <div class="glass-card activity-log-card">
+          <div class="card-header-flex">
+            <div>
+              <h3 class="card-title">ALL FALL DETECTIONS LOG</h3>
+              <p class="card-caption">Complete historical register of detected fall impacts</p>
+            </div>
+            <button id="btnClearFallLog" class="btn-text-xs">Clear Log</button>
+          </div>
+          
+          <div id="fallHistoryList" class="fall-history-scroll">
+            <!-- Dynamic fall detection entries -->
+          </div>
+        </div>
+
+      </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer glass-card">
+      <div class="footer-left">
+        <span>FallSafe™ Industrial Telemetry Bridge v2.1</span>
+        <span class="footer-dot">•</span>
+        <span>Phone-to-PC REST Telemetry Protocol</span>
+        <span class="footer-dot">•</span>
+        <span class="text-mint">Bridge Active</span>
+      </div>
+      <div class="footer-right">
+        <span>ESP32-C3 (BLE) ➔ Phone App ➔ PC Manager Dashboard</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Modal: Add / Edit Employee -->
+  <div id="employeeModal" class="modal-overlay hidden">
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h3 id="modalTitle" class="modal-heading">Add Personnel to Monitoring</h3>
+        <button id="btnCloseModal" class="modal-close-btn">&times;</button>
+      </div>
+      <form id="employeeForm">
+        <input type="hidden" id="formEmployeeId">
+
+        <div class="form-group">
+          <label for="inputEmpName">Full Name</label>
+          <input type="text" id="inputEmpName" class="form-input" placeholder="e.g. Alex Morgan" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputEmpRole">Role / Position</label>
+            <input type="text" id="inputEmpRole" class="form-input" placeholder="e.g. Structural Technician" required>
+          </div>
+          <div class="form-group">
+            <label for="inputEmpDept">Department / Zone</label>
+            <input type="text" id="inputEmpDept" class="form-input" placeholder="e.g. Sector 4 High-Rise" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputEmergencyName">Emergency Contact Person</label>
+            <input type="text" id="inputEmergencyName" class="form-input" placeholder="e.g. Sarah Morgan (Supervisor)" required>
+          </div>
+          <div class="form-group">
+            <label for="inputEmergencyPhone">Emergency Phone Number</label>
+            <input type="tel" id="inputEmergencyPhone" class="form-input" placeholder="e.g. +91 98765 43210" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputDeviceName">Assigned FallSafe BLE Hardware</label>
+          <select id="inputDeviceName" class="form-input">
+            <option value="FallSafe">FallSafe (Primary Seeed XIAO ESP32-C3)</option>
+            <option value="FallSafe-02">FallSafe Unit 02 (Worker 2)</option>
+            <option value="FallSafe-03">FallSafe Unit 03 (Worker 3)</option>
+            <option value="Unassigned">No Hardware Assigned</option>
+          </select>
+        </div>
+
+        <div class="modal-buttons">
+          <button type="button" id="btnCancelModal" class="btn btn-outline">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Personnel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

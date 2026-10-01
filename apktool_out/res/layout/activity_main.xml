@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_map">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:background="#95031822">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="28dp">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="14dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FALLSAFE"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.08"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"/>
+
+                    <TextView
+                        android:id="@+id/app_tagline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="WORKER SAFETY MONITOR"
+                        android:textColor="#CFF0F5"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.12"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"
+                        android:layout_marginTop="2dp"/>
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/settingButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/baseline_settings_24"
+                    android:background="@drawable/card_surface_refined"
+                    android:padding="9dp"
+                    android:tint="#CFF0F5"
+                    android:contentDescription="Settings"/>
+            </LinearLayout>
+
+            <!-- System status -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/card_surface_refined"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="18dp">
+
+                <View
+                    android:id="@+id/status_dot"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/status_dot_red"
+                    android:layout_marginEnd="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/status_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PROTECTION INACTIVE"
+                        android:textColor="#EF4444"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"/>
+
+                    <TextView
+                        android:id="@+id/status_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Device disconnected — tap Connect device below"
+                        android:textColor="#CFF0F5"
+                        android:textSize="11sp"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/status_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OFFLINE"
+                    android:textColor="#EF4444"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08"
+                    android:fontFamily="@font/futura"
+                    app:fontFamily="@font/futura"/>
+            </LinearLayout>
+
+            <!-- Device -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEVICE"
+                android:textColor="#E2F9D3"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.12"
+                android:fontFamily="@font/futura"
+                app:fontFamily="@font/futura"
+                android:layout_marginBottom="7dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_surface_refined"
+                android:padding="14dp"
+                android:layout_marginBottom="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/baseline_settings_24"
+                        android:tint="#CFF0F5"
+                        android:contentDescription="Bluetooth"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="FallSafe Hardware Unit"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"
+                        android:layout_marginStart="9dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BLE"
+                        android:textColor="#CFF0F5"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.08"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/available_devices_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:text="Connect device"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/futura"
+                    app:fontFamily="@font/futura"
+                    android:background="@drawable/btn_action_primary"
+                    app:backgroundTint="@null"
+                    android:backgroundTint="@null"
+                    android:textAllCaps="false"/>
+            </LinearLayout>
+
+            <!-- Vitals -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VITALS"
+                android:textColor="#E2F9D3"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.12"
+                android:fontFamily="@font/futura"
+                app:fontFamily="@font/futura"
+                android:layout_marginBottom="7dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/card_surface_refined"
+                android:padding="14dp"
+                android:layout_marginBottom="18dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_heart_pulse"
+                    android:tint="#F87171"
+                    android:contentDescription="Heart rate"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Heart rate"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Live reading"
+                        android:textColor="#CFF0F5"
+                        android:textSize="11sp"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/heart_rate_button"
+                    android:layout_width="112dp"
+                    android:layout_height="42dp"
+                    android:text="— BPM"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/futura"
+                    app:fontFamily="@font/futura"
+                    android:background="@drawable/btn_action_danger"
+                    app:backgroundTint="@null"
+                    android:backgroundTint="@null"
+                    android:textAllCaps="false"/>
+            </LinearLayout>
+
+            <!-- Unboxed GIF Animation -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="18dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/animation"/>
+            </LinearLayout>
+
+            <!-- Location -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOCATION"
+                android:textColor="#E2F9D3"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.12"
+                android:fontFamily="@font/futura"
+                app:fontFamily="@font/futura"
+                android:layout_marginBottom="7dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_surface_refined"
+                android:padding="14dp"
+                android:layout_marginBottom="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="9dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_gps_fixed"
+                        android:tint="#CFF0F5"
+                        android:contentDescription="GPS"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="GPS position"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"
+                        android:layout_marginStart="9dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GPS"
+                        android:textColor="#CFF0F5"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.08"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Acquiring GPS fix..."
+                    android:textSize="13sp"
+                    android:textColor="#CFF0F5"
+                    android:fontFamily="@font/futura"
+                    app:fontFamily="@font/futura"
+                    android:lineSpacingExtra="3dp"/>
+            </LinearLayout>
+
+            <!-- Emergency contact -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EMERGENCY"
+                android:textColor="#E2F9D3"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.12"
+                android:fontFamily="@font/futura"
+                app:fontFamily="@font/futura"
+                android:layout_marginBottom="7dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/card_surface_refined"
+                android:padding="14dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_emergency_sos"
+                    android:tint="#E2F9D3"
+                    android:contentDescription="Emergency contact"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Emergency contact"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"/>
+
+                    <TextView
+                        android:id="@+id/sos_number_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Not configured"
+                        android:textSize="12sp"
+                        android:textColor="#CFF0F5"
+                        android:fontFamily="@font/futura"
+                        app:fontFamily="@font/futura"
+                        android:layout_marginTop="3dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SETTINGS"
+                    android:textColor="#CFF0F5"
+                    android:textSize="9sp"
+                    android:letterSpacing="0.08"
+                    android:fontFamily="@font/futura"
+                    app:fontFamily="@font/futura"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
